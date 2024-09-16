@@ -6,14 +6,13 @@ import dotenv from "dotenv";
 dotenv.config()
 const app = express();
 const port = process.env.PORT || 3000;
-console.log(process.env.PORT)
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on('Error', ()=> console.log('Failed to connect'))
 db.once('open',()=> console.log('DB Connected....'))
 
 app.use(express.json());
-app.use('/items',router);
+app.use('/api',router);
 
 
 
