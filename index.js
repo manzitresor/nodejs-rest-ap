@@ -1,14 +1,22 @@
 import express from "express";
-import bodyParser from 'body-parser'
 import router from "./routes/items.js"
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-
+dotenv.config()
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT || 3000;
+console.log(process.env.PORT)
+mongoose.connect(process.env.DATABASE_URL);
+const db = mongoose.connection;
+db.on('Error', ()=> console.log('Failed to connect'))
+db.once('open',()=> console.log('DB Connected....'))
 
-app.use(bodyParser.json());
-app.use('/items',router)
+app.use(express.json());
+app.use('/items',router);
 
 
 
-app.listen(PORT,()=> console.log("Server started...."));
+app.listen(port,()=> console.log(`Server is running on Port ${port}`));
+
+
