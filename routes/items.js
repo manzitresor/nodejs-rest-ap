@@ -36,5 +36,26 @@ router.post('/items',async(req,res) => {
         res.status(500).json({message: error.message})   
     }
 })
+router.put('/items/:id',async(req,res) => {
+    const newItem = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+    }
+    try {
+       const findItem = await Item.findOne({ id: req.params.id });
+       if(!findItem){
+           res.status(404).json({message: 'Can not get Item'})
+        }
+    const item = await Item.findOneAndUpdate(
+        { id: req.params.id },
+         newItem,
+        { new: true }
+    )
+    res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
 
 export default router;
