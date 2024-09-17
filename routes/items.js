@@ -57,5 +57,15 @@ router.put('/items/:id',async(req,res) => {
         res.status(500).json({message: error.message})
     }
 })
+router.delete('/items/:id',async(req,res) => {
+    try {
+        const item = await Item.findOne({id: req.params.id})
+        if(!item) res.status(404).json({message: "Item not found"})
+        await Item.findOneAndDelete(item)
+        res.status(200).json({message: "Item deleted"})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
 
 export default router;
