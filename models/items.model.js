@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
-    id: {
+    item_id: {
         type: String,
         unique: true,
         required: true
@@ -16,7 +16,7 @@ const itemSchema = new mongoose.Schema({
     price: {
         type: String,
         required: true
-    }
-})
+    },
+},{timestamps: true})
 
 export const Item = mongoose.model('Item',itemSchema);

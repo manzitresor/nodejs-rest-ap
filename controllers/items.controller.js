@@ -23,7 +23,7 @@ export const getItem = async(req, res) => {
 
 export const createItem = async(req,res) => {
     const newItem = {
-        id: uuidv4(),
+        item_id: uuidv4(),
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
@@ -60,7 +60,7 @@ export const updateItem = async(req,res) => {
 
 export const deleteItem = async(req,res) => {
     try {
-        const item = await Item.findOne({id: req.params.id})
+        const item = await Item.findOne({item_id: req.params.id})
         if(!item) res.status(404).json({message: "Item not found"})
         await Item.findOneAndDelete(item)
         res.status(200).json({message: "Item deleted"})
