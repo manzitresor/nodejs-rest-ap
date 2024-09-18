@@ -1,14 +1,9 @@
 import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
-    item_id: {
-        type: String,
-        unique: true,
-        required: true
-    },
     name: {
         type: String,
-        unique: true
+        required: true
     },
     description: {
         type: String,
@@ -17,6 +12,6 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-},{timestamps: true})
+}, {timestamps: true});
 
-export const Item = mongoose.model('Item',itemSchema);
+export const Item = mongoose.model('Item', itemSchema);
